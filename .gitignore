@@ -1,0 +1,15 @@
+# Java
+
+build/
+
+# IntelliJ
+
+.idea/
+
+# Gradle
+
+.gradle/
+
+# Logging
+
+*.log

@@ -1,0 +1,29 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="S3FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>testFile.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="com.unrulymedia.logback.rolling.TimeBasedS3RollingPolicy">
+            <!-- Rollover every minute. -->
+            <fileNamePattern>testFile.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <!-- Keep 30 minutes worth of history capped at 1GB total size. -->
+            <maxHistory>5</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="trace">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="S3FILE"/>
+    </root>
+</configuration>
